@@ -1,24 +1,16 @@
 
-public class Slime implements Cloneable {
-	int hp = 0;
-	int atk = 10;
-	String name = "";
-	boolean isActive = false;
+public class Slime extends Monster implements Cloneable {
 	
-	public Slime(String name) {
-		this.hp = 30;
-		this.name = name;
-	}
+	private int health;
+	private int attackPower;
 	
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-	
-	public int getHp() {
-		return this.hp;
+	public Slime(int health, int attackPower) {
+		super(health, attackPower);
 	}
 	
 	public Slime clone() {
-		return new Slime("Baby Slime");
+		Slime s = new Slime(this.health, this.attackPower);
+		// TODO: Add slime to monsterPool
+		return s;
 	}
 }

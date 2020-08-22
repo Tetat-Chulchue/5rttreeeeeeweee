@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class MPool {
+public class MonsterPool {
 	int maxSize = 10;
-	ArrayList<Slime> monsterPool = new ArrayList<Slime>();
+	ArrayList<Monster> monsterPool = new ArrayList<Monster>();
 	
-	public void addMonster(Slime s) {
+	public void addMonster(Monster m) {
 		if (monsterPool.size() < this.maxSize) {
-			monsterPool.add(s);
+			monsterPool.add(m);
 		} else {
 			System.out.print("Pool is full");
 		}
