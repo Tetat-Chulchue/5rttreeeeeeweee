@@ -10,7 +10,7 @@ public class Slime extends Monster implements Cloneable {
 	
 	public Slime clone() {
 		Slime s = new Slime(this.health, this.attackPower);
-		// TODO: Add slime to monsterPool
+		MonsterPool.getInstance().addMonster(s);
 		return s;
 	}
 }
