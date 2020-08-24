@@ -40,7 +40,7 @@ public class Map {
 	}
 
 	public boolean checkPosition(int x, int y){
-		for(int i=0;i<3;i++){
+		for(int i=0;i<this.monsterPosition.size();i++){
 			HashMap<String, Integer> monster = this.monsterPosition.get(i);
 			if (x == monster.get("x") && y == monster.get("y")){
 				return true;
@@ -50,7 +50,7 @@ public class Map {
 	}
 
 	public void removeMonster(int x, int y){
-		for(int i=0;i<3;i++){
+		for(int i=0;i<this.monsterPosition.size();i++){
 			HashMap<String, Integer> monster = this.monsterPosition.get(i);
 			if (x == monster.get("x") && y == monster.get("y")){
 				this.monsterPosition.remove(i);
