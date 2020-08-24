@@ -1,20 +1,29 @@
 
 public class Map {
-	private String name;
-	private Object[][] mapData = new Object[11][11];
-	
-	public String getName() {
-		return name;
+	private int mapLenght = 10;
+	public Map() {
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void render(x, y){
+		try {
+			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for(int i=0;i<this.mapLenght;i++){
+			for (int j=0;j<this.mapLenght;j++){
+				if(x == j && y == i){
+					System.out.print("@ ");
+				} else {
+					System.out.print("* ");
+				}
+				System.out.println("");
+			}
+		}
 	}
-	public Object[][] getMapData() {
-		return mapData;
+
+	public boolean cheackPosition(){
+
 	}
-	public void setMapData(Object[][] mapData) {
-		this.mapData = mapData;
-	}
-	
-	
+
 }
