@@ -5,12 +5,15 @@ public class Map {
 	private int mapLenght = 10;
 	public Map() {
 		HashMap<String, Integer> mon1  = new HashMap<String, Integer>();
+		mon1.put("id", 0);
 		mon1.put("x", 7);
 		mon1.put("y", 1);
 		HashMap<String, Integer> mon2  = new HashMap<String, Integer>();
+		mon1.put("id", 1);
 		mon2.put("x", 2);
 		mon2.put("y", 5);
 		HashMap<String, Integer> mon3  = new HashMap<String, Integer>();
+		mon1.put("id", 2);
 		mon3.put("x", 7);
 		mon3.put("y", 8);
 		monsterPosition.add(mon1);
@@ -37,11 +40,11 @@ public class Map {
 		}
 	}
 
-	public boolean checkPosition(int x, int y){
+	public int checkPosition(int x, int y){
 		for(int i=0;i<this.monsterPosition.size();i++){
 			HashMap<String, Integer> monster = this.monsterPosition.get(i);
 			if (x == monster.get("x") && y == monster.get("y")){
-				return true;
+				return monster.get("id");
 			}
 		}
 		return false;
