@@ -1,7 +1,5 @@
 
 public abstract class Entity {
-	protected int x = 0;
-	protected int y = 0;
 	protected int health = 0;
 	protected int attackPower = 0;
 	

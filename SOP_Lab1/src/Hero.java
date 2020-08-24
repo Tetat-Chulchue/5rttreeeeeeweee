@@ -1,6 +1,6 @@
 public class Hero extends Entity {
-	private static int x = 0;
-	private static int y = 0;
+	private int x = 0;
+	private int y = 0;
 	private static Hero singleton;
 	
 	public static Hero getInstance(int health, int attackPower) {
@@ -31,19 +31,32 @@ public class Hero extends Entity {
 	}
 	
 	public void setPosition(String input) {
-        
+        System.out.println(this.x);
+        System.out.print(this.y);
         if (input.equals("W") || input.equals("w")) {
-        	System.out.println("Hero move: W");
+        	if (this.y > 0) {
+        		this.y--;
+        	}
         }
         if (input.equals("A") || input.equals("a")) {
         	System.out.println("Hero move: A");
+        	if (this.x > 0) {
+        		this.x--;
+        	}
         }
         if (input.equals("S") || input.equals("s")) {
-        	System.out.println("Hero move: S");
+        	if (this.y < 9) {
+        		this.y++;
+        	}
         }
         if (input.equals("D") || input.equals("d")) {
-        	System.out.println("Hero move: D");
+        	if (this.x < 9) {
+        		this.x++;
+        	}
         }
 	}
+	
+	public int getX() {return x;}
+	public int getY() {return y;}
 	
 }
