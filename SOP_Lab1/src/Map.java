@@ -29,7 +29,9 @@ public class Map {
 			for (int j=0;j<this.mapLenght;j++){
 				if(x == j && y == i){
 					System.out.print("@ ");
-				} else {
+				} else if ((j == this.monsterPosition.get(0).get("x") && i == this.monsterPosition.get(0).get("y")) || (j == this.monsterPosition.get(1).get("x") && i == this.monsterPosition.get(1).get("y")) || (j == this.monsterPosition.get(2).get("x") && i == this.monsterPosition.get(2).get("y"))) {
+                    System.out.print("M ");
+                } else {
 					System.out.print("* ");
 				}
 			}
@@ -47,12 +49,11 @@ public class Map {
 		return false;
 	}
 
-	public boolean removeMonster(int x, int y){
+	public void removeMonster(int x, int y){
 		for(int i=0;i<3;i++){
 			HashMap<String, Integer> monster = this.monsterPosition.get(i);
 			if (x == monster.get("x") && y == monster.get("y")){
 				this.monsterPosition.remove(i);
-				return 0;
 			}
 		}
 	}
