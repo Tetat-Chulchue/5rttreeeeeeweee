@@ -47,4 +47,14 @@ public class Map {
 		return false;
 	}
 
+	public boolean removeMonster(int x, int y){
+		for(int i=0;i<3;i++){
+			HashMap<String, Integer> monster = this.monsterPosition.get(i);
+			if (x == monster.get("x") && y == monster.get("y")){
+				this.monsterPosition.remove(i);
+				return 0;
+			}
+		}
+	}
+
 }
