@@ -47,7 +47,7 @@ public class Map {
 				return monster.get("id");
 			}
 		}
-		return false;
+		return 99;
 	}
 
 	public void removeMonster(int x, int y){
