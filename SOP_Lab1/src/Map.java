@@ -29,9 +29,7 @@ public class Map {
 			for (int j=0;j<this.mapLenght;j++){
 				if(x == j && y == i){
 					System.out.print("@ ");
-				} else if ((j == this.monsterPosition.get(0).get("x") && i == this.monsterPosition.get(0).get("y")) || (j == this.monsterPosition.get(1).get("x") && i == this.monsterPosition.get(1).get("y")) || (j == this.monsterPosition.get(2).get("x") && i == this.monsterPosition.get(2).get("y"))) {
-                    System.out.print("M ");
-                } else {
+				} else {
 					System.out.print("* ");
 				}
 			}
