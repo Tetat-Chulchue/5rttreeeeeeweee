@@ -31,13 +31,14 @@ public class Map {
 		for(int i=0;i<this.mapLenght;i++){
 			for (int j=0;j<this.mapLenght;j++){
 				String point = "* ";
-				for(int m=0;m<monsterPosition.size();m++){
-					if(monsterPosition.get(m).get("x") == j && monsterPosition.get(m).get("y") == i){
-						point = "? ";
-						break;
+				if(x == j && y == i){ point = "H "; } else {
+					for(int m=0;m<monsterPosition.size();m++){
+						if(monsterPosition.get(m).get("x") == j && monsterPosition.get(m).get("y") == i){
+							point = "? ";
+							break;
+						}
 					}
 				}
-				if(x == j && y == i){ point = "H "; }
 				System.out.print(point);
 			}
 			System.out.println("");
