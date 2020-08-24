@@ -1,7 +1,9 @@
 
 public abstract class Entity {
-	protected int health;
-	protected int attackPower;
+	protected int x = 0;
+	protected int y = 0;
+	protected int health = 0;
+	protected int attackPower = 0;
 	
 	public Entity(int health, int attackPower) {
 		this.health = health;
