@@ -4,7 +4,7 @@ public class Map {
 	public Map() {
 	}
 
-	public void render(x, y){
+	public void render(int x, int y){
 		try {
 			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
 		} catch (Exception e) {
