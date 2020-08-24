@@ -9,11 +9,11 @@ public class Map {
 		mon1.put("x", 7);
 		mon1.put("y", 1);
 		HashMap<String, Integer> mon2  = new HashMap<String, Integer>();
-		mon1.put("id", 1);
+		mon2.put("id", 1);
 		mon2.put("x", 2);
 		mon2.put("y", 5);
 		HashMap<String, Integer> mon3  = new HashMap<String, Integer>();
-		mon1.put("id", 2);
+		mon3.put("id", 2);
 		mon3.put("x", 7);
 		mon3.put("y", 8);
 		monsterPosition.add(mon1);
