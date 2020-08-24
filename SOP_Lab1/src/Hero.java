@@ -30,16 +30,13 @@ public class Hero extends Entity {
 		this.attackPower = attackPower;
 	}
 	
-	public void setPosition(String input) {
-        System.out.println(this.x);
-        System.out.print(this.y);
+	public void move(String input) {
         if (input.equals("W") || input.equals("w")) {
         	if (this.y > 0) {
         		this.y--;
         	}
         }
         if (input.equals("A") || input.equals("a")) {
-        	System.out.println("Hero move: A");
         	if (this.x > 0) {
         		this.x--;
         	}

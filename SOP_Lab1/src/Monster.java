@@ -1,13 +1,11 @@
 public abstract class Monster extends Entity {
-	private int health;
-	private int attackPower;
 	
 	public Monster(int health, int attackPower) {
 		super(health, attackPower);
 	}
 
 	public int getHealth() {
-		return health;
+		return this.health;
 	}
 
 	public void setHealth(int health) {
@@ -15,7 +13,7 @@ public abstract class Monster extends Entity {
 	}
 
 	public int getAttackPower() {
-		return attackPower;
+		return this.attackPower;
 	}
 
 	public void setAttackPower(int attackPower) {

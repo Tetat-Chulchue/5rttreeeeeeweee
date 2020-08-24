@@ -23,15 +23,15 @@ public class Map {
 	}
 
 	public void render(int x, int y){
-		try {
-			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		for(int i=0;i<this.mapLenght;i++){
 			for (int j=0;j<this.mapLenght;j++){
 				if(x == j && y == i){
-					System.out.print("@ ");
+					System.out.print("H ");
 				} else {
 					System.out.print("* ");
 				}

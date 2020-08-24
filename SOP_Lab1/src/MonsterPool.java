@@ -5,7 +5,11 @@ public class MonsterPool {
 	private ArrayList<Monster> monsterPool = new ArrayList<Monster>();
 	private static MonsterPool singleton;
 	
-	private MonsterPool() {}
+	private MonsterPool() {
+		monsterPool.add(new Slime(50, 2));
+		monsterPool.add(new Slime(25, 4));
+		monsterPool.add(new Slime(15, 6));
+	}
 	
 	public static MonsterPool getInstance() {
 		if (singleton == null) {
@@ -20,5 +24,18 @@ public class MonsterPool {
 		} else {
 			System.out.print("Pool is full");
 		}
+	}
+	
+	public int getSize() {return monsterPool.size();}
+	
+	public Monster getMonster(int index) {
+		if (monsterPool.size() > 0) {
+			return monsterPool.get(index);
+		} else {
+			System.out.print("New MON in poold");
+			monsterPool.add(new Slime(20, 2));
+			return monsterPool.get(index);
+		}
+		
 	}
 }
