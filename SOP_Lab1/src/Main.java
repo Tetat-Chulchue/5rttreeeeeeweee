@@ -13,8 +13,9 @@ public class Main {
 	    while (true) {
 	    	map.render(hero.getX(), hero.getY());
 	    	System.out.println("[Hero] HP:"+ hero.getHealth() +" ATK:" + hero.getAttackPower());
-	    	if (map.checkPosition(hero.getX(), hero.getY()) != 99 && map.checkPosition(hero.getX(), hero.getY()) != 100) {
-	    		Monster monster = pool.getMonster(map.checkPosition(hero.getX(), hero.getY()));
+	    	int state = map.checkPosition(hero.getX(), hero.getY());
+	    	if (state != 99 && state != 100) {
+	    		Monster monster = pool.getMonster(state);
 	    		if (monster.getHealth() <= 0) {
 	        		map.removeMonster(hero.getX(), hero.getY());
 	        	} else {
@@ -44,7 +45,7 @@ public class Main {
 		        		break;
         			}
 		        }
-	    	} else if (map.checkPosition(hero.getX(), hero.getY()) == 100) { 
+	    	} else if (state == 100) {
 	    		hero.setHealth(hero.getHealth() + 10);
 	        	System.out.println("[System] Healing!!");
 	    		Scanner key = new Scanner(System.in);

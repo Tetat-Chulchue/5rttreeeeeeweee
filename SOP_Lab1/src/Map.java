@@ -58,7 +58,7 @@ public class Map {
 						}
 					}
 					for(int p=0; p<potions.size(); p++){
-						if (potions.get(p).get("x") == j && monsterPosition.get(p).get("y") == i) {
+						if (potions.get(p).get("x") == j && potions.get(p).get("y") == i) {
 							point = "P ";
 							break;
 						}
@@ -80,9 +80,12 @@ public class Map {
 		for(int i=0;i<this.potions.size();i++){
 			HashMap<String, Integer> potion = this.potions.get(i);
 			if (x == potion.get("x") && y == potion.get("y")){
+				this.potions.remove(i);
+				System.out.println("100");
 				return 100;
 			}
 		}
+		System.out.println("99");
 		return 99;
 	}
 
