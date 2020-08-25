@@ -6,9 +6,10 @@ public class MonsterPool {
 	private static MonsterPool singleton;
 	
 	private MonsterPool() {
-		monsterPool.add(new Slime(50, 2));
-		monsterPool.add(new Slime(25, 4));
-		monsterPool.add(new Slime(15, 6));
+		Slime s = new Slime(50, 4);
+		monsterPool.add(s);
+		monsterPool.add(s.clone());
+		monsterPool.add(s.clone());
 	}
 	
 	public static MonsterPool getInstance() {
