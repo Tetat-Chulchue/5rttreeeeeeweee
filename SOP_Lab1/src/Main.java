@@ -20,12 +20,13 @@ public class Main {
 	    		Scanner key = new Scanner(System.in);
 		        String keyInput = key.nextLine();
 		        hero.move(keyInput);
+
 		        if (keyInput.equals("K") || keyInput.equals("k")) {
-		        	monster.setHealth(monster.getHealth() - hero.getAttackPower());
+		        	monster.attack(hero);
 		        	if (monster.getHealth() <= 0) {
 		        		map.removeMonster(hero.getX(), hero.getY());
 		        	}
-		        	hero.setHealth(hero.getHealth() - monster.getAttackPower());
+		        	hero.attack(monster);
 		        	if (hero.getHealth() == 0) {
 		        		break;
 		        	}

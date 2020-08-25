@@ -28,12 +28,14 @@ public class Map {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		for(int i=0;i<this.mapLenght;i++){
-			for (int j=0;j<this.mapLenght;j++){
+		for(int i=0;i<this.mapLenght;i++) {
+			for (int j=0;j<this.mapLenght;j++) {
 				String point = "* ";
-				if(x == j && y == i){ point = "H "; } else {
-					for(int m=0;m<monsterPosition.size();m++){
-						if(monsterPosition.get(m).get("x") == j && monsterPosition.get(m).get("y") == i){
+				if(x == j && y == i) { 
+					point = "H "; 
+				} else {
+					for(int m=0; m<monsterPosition.size(); m++){
+						if (monsterPosition.get(m).get("x") == j && monsterPosition.get(m).get("y") == i) {
 							point = "? ";
 							break;
 						}
