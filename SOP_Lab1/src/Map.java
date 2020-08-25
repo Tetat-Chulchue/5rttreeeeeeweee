@@ -81,11 +81,9 @@ public class Map {
 			HashMap<String, Integer> potion = this.potions.get(i);
 			if (x == potion.get("x") && y == potion.get("y")){
 				this.potions.remove(i);
-				System.out.println("100");
 				return 100;
 			}
 		}
-		System.out.println("99");
 		return 99;
 	}
 

@@ -47,10 +47,6 @@ public class Main {
 		        }
 	    	} else if (state == 100) {
 	    		hero.setHealth(hero.getHealth() + 10);
-	        	System.out.println("[System] Healing!!");
-	    		Scanner key = new Scanner(System.in);
-		        String keyInput = key.nextLine();
-		        hero.move(keyInput);
 	    	} else {
 		    	System.out.print("--> ");
 		    	Scanner key = new Scanner(System.in);
