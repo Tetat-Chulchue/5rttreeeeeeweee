@@ -7,7 +7,7 @@ public class Main {
 	    System.out.println("[?] = Monster, [P] = Potion\n");
 	    MonsterPool pool = MonsterPool.getInstance();
 	    Boss boss = Boss.getInstance();
-	    Hero hero = Hero.getInstance(40, 10);
+	    Hero hero = Hero.getInstance(50, 10);
 	    Map map = new Map();
 	    
 	    while (true) {
@@ -33,7 +33,7 @@ public class Main {
 		        	if (hero.getHealth() <= 0) {
 		        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		        	    System.out.println("Game Over!!");
-		        	    System.out.print("[System] You dead \"noob55555\"");
+		        	    System.out.print("[System] You dead!!");
 		        		break;
 		        	}
 		        	int poolSize = pool.getSize() + 1;
