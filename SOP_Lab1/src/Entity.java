@@ -27,6 +27,4 @@ public abstract class Entity {
 	public void attack(Entity target) {
 		target.setHealth(target.getHealth() - this.attackPower);
 	}
-	
-	
 }

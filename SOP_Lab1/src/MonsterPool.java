@@ -30,13 +30,11 @@ public class MonsterPool {
 	public int getSize() {return monsterPool.size();}
 	
 	public Monster getMonster(int index) {
-		if (monsterPool.size() > 0) {
+		if (monsterPool.size() >= 0) {
 			return monsterPool.get(index);
 		} else {
-			System.out.print("New MON in poold");
 			monsterPool.add(new Slime(20, 2));
 			return monsterPool.get(index);
 		}
-		
 	}
 }

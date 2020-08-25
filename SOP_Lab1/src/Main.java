@@ -6,7 +6,6 @@ public class Main {
 	    System.out.println("Key \"K\" To Attack");
 	    System.out.println("[?] = Monster, [P] = Potion\n");
 	    MonsterPool pool = MonsterPool.getInstance();
-	    Boss boss = Boss.getInstance();
 	    Hero hero = Hero.getInstance(50, 10);
 	    Map map = new Map();
 	    
@@ -15,6 +14,7 @@ public class Main {
 	    	System.out.println("[Hero] HP:"+ hero.getHealth() +" ATK:" + hero.getAttackPower());
 	    	int state = map.checkPosition(hero.getX(), hero.getY());
 	    	if (state != 99 && state != 100) {
+	    		
 	    		Monster monster = pool.getMonster(state);
 	    		if (monster.getHealth() <= 0) {
 	        		map.removeMonster(hero.getX(), hero.getY());
@@ -26,10 +26,11 @@ public class Main {
 	    		Scanner key = new Scanner(System.in);
 		        String keyInput = key.nextLine();
 		        hero.move(keyInput);
-
+		        
 		        if (keyInput.equals("K") || keyInput.equals("k")) {
-		        	monster.attack(hero);
+		        	
 		        	hero.attack(monster);
+		        	monster.attack(hero);
 		        	if (hero.getHealth() <= 0) {
 		        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		        	    System.out.println("Game Over!!");
@@ -44,6 +45,7 @@ public class Main {
 		        	    System.out.print("[System] You Win!!");
 		        		break;
         			}
+		        	
 		        }
 	    	} else if (state == 100) {
 	    		hero.setHealth(hero.getHealth() + 10);
@@ -54,9 +56,6 @@ public class Main {
 		        hero.move(keyInput);
 		        System.out.println("");
 	    	}
-	    	
-	    }
-	    
+	    } 
 	}
 }
-
