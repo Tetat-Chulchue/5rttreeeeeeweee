@@ -6,7 +6,7 @@ public class Slime extends Monster implements Cloneable {
 	
 	public Slime clone() {
 		super.health = (int)(super.health-(super.health * 0.08));
-		Slime s = new Slime((int)(super.health-(super.health * 0.15)), super.attackPower);
+		Slime s = new Slime((int)(super.health-(super.health * 0.15)), (int)(super.attackPower + 1));
 		return s;
 	}
 }

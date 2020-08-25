@@ -59,7 +59,7 @@ public class Map {
 					}
 					for(int p=0; p<potions.size(); p++){
 						if (potions.get(p).get("x") == j && monsterPosition.get(p).get("y") == i) {
-							point = "♥ ";
+							point = "P ";
 							break;
 						}
 					}
