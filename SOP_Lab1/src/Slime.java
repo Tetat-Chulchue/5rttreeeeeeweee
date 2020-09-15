@@ -1,16 +1,12 @@
 
 public class Slime extends Monster implements Cloneable {
-	
-	private int health;
-	private int attackPower;
-	
 	public Slime(int health, int attackPower) {
 		super(health, attackPower);
 	}
 	
 	public Slime clone() {
-		Slime s = new Slime(this.health, this.attackPower);
-		MonsterPool.getInstance().addMonster(s);
+		super.health = (int)(super.health-(super.health * 0.08));
+		Slime s = new Slime((int)(super.health-(super.health * 0.15)), (int)(super.attackPower + 1));
 		return s;
 	}
 }

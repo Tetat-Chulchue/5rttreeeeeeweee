@@ -1,44 +1,61 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-	static int forward = 0;
-	
-	
-	public static void main(String[] args) throws IOException {
-	    System.out.println("Key \"WESD\" To Move");
-	    System.out.println("Key \"J\" To Attack");
+	public static void main(String[] args) {
+	    System.out.println("Key \"WASD\" To Move");
+	    System.out.println("Key \"K\" To Attack");
+	    System.out.println("[?] = Monster, [P] = Potion\n");
+	    MonsterPool pool = MonsterPool.getInstance();
+	    Hero hero = Hero.getInstance(50, 10);
+	    Map map = new Map();
 	    
 	    while (true) {
-	    	
-	    	Scanner key = new Scanner(System.in);
-	        String key_test = key.nextLine();
-	        System.out.print("\nPlease Enter Key ");
-	        if (key_test.equals("W") || key_test.equals("w")) {
-	        	System.out.print("You forward ");
-	        	forward = forward + 1;
+	    	map.render(hero.getX(), hero.getY());
+	    	System.out.println("[Hero] HP:"+ hero.getHealth() +" ATK:" + hero.getAttackPower());
+	    	int state = map.checkPosition(hero.getX(), hero.getY());
+	    	if (state != 99 && state != 100) {
+	    		
+	    		Monster monster = pool.getMonster(state);
+	    		if (monster.getHealth() <= 0) {
+	        		map.removeMonster(hero.getX(), hero.getY());
+	        	} else {
+	        		System.out.println("[Monster] HP:"+ monster.getHealth() +" ATK: "+ monster.getAttackPower());
+	        		System.out.println("Attack: [K]");
 	        	}
-	        if (key_test.equals("A") || key_test.equals("a")) {
-	        	System.out.print("You Turn Left ");
-	        	}
-	        if (key_test.equals("D") || key_test.equals("d")) {
-	        	System.out.print("You Turn Right ");		        	
-	        	}
-	        if (key_test.equals("S") || key_test.equals("s")) {
-	        	System.out.print("You Rearward ");		        	
-	        	}
-	        if (key_test.equals("J") || key_test.equals("j")) {
-	        	System.out.print("You Attack ...()=w=) ");		        	
-	        	}
-	        
-	        
-	        
-	        if (forward == 3) {
-	        	System.out.print("\nYou found monster [Slime]");
-	        }
-	        
-	          
-	      }  
-	  }
+	    		System.out.print("--> ");
+	    		Scanner key = new Scanner(System.in);
+		        String keyInput = key.nextLine();
+		        hero.move(keyInput);
+		        
+		        if (keyInput.equals("K") || keyInput.equals("k")) {
+		        	
+		        	hero.attack(monster);
+		        	monster.attack(hero);
+		        	if (hero.getHealth() <= 0) {
+		        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		        	    System.out.println("Game Over!!");
+		        	    System.out.print("[System] You dead!!");
+		        		break;
+		        	}
+		        	int poolSize = pool.getSize() + 1;
+	        		int monsterDead = 1;
+		        	for (int i = 0; i < pool.getSize(); i++) {if (pool.getMonster(i).getHealth() <= 0) {monsterDead++;}}
+		        	if (poolSize == monsterDead) {
+        				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		        	    System.out.print("[System] You Win!!");
+		        		break;
+        			}
+		        	
+		        }
+	    	} else if (state == 100) {
+	    		hero.setHealth(hero.getHealth() + 10);
+	    	} else {
+		    	System.out.print("--> ");
+		    	Scanner key = new Scanner(System.in);
+		        String keyInput = key.nextLine();
+		        hero.move(keyInput);
+		        System.out.println("");
+	    	}
+	    } 
+	}
 }
-

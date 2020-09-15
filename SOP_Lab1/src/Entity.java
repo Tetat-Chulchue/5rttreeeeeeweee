@@ -1,7 +1,7 @@
 
 public abstract class Entity {
-	protected int health;
-	protected int attackPower;
+	protected int health = 0;
+	protected int attackPower = 0;
 	
 	public Entity(int health, int attackPower) {
 		this.health = health;
@@ -27,6 +27,4 @@ public abstract class Entity {
 	public void attack(Entity target) {
 		target.setHealth(target.getHealth() - this.attackPower);
 	}
-	
-	
 }
