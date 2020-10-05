@@ -1,0 +1,1082 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Simple Inventory API",
+      "description": "This is a simple API",
+      "contact": {
+        "email": "you@your-company.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://virtserver.swaggerhub.com/Tetat-Chulchue/Taxi/1.0.0",
+        "description": "SwaggerHub API Auto Mocking"
+      }
+    ],
+    "tags": [
+      {
+        "name": "payment service",
+        "desciption": "Api for payment service"
+      },
+      {
+        "name": "tracking service",
+        "desciption": "Api for feedback service"
+      },
+      {
+        "name": "vehicle service",
+        "desciption": "Api for vehicle service"
+      },
+      {
+        "name": "messaging service",
+        "desciption": "Api for messaging service"
+      },
+      {
+        "name": "location service",
+        "desciption": "Api for location service"
+      },
+      {
+        "name": "customer service",
+        "desciption": "Api for customer service"
+      },
+      {
+        "name": "feedback service",
+        "desciption": "Api for feedback service"
+      },
+      {
+        "name": "promotion service",
+        "desciption": "Api for promotion service"
+      },
+      {
+        "name": "driver service",
+        "desciption": "Api for driver service"
+      }
+    ],
+    "paths": {
+      "/payment/pay/{tansportId}": {
+        "post": {
+          "tags": [
+            "payment service"
+          ],
+          "summary": "pay to taxi",
+          "parameters": [
+            {
+              "name": "tansportId",
+              "in": "path",
+              "description": "id of tansport",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "pay successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "pay successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "404": {
+              "description": "transport not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/payment/history/{userId}": {
+        "get": {
+          "tags": [
+            "payment service"
+          ],
+          "summary": "get payment history",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "id of user",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "retrieve successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "retrieve successful"
+                      },
+                      "histoty": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "price": {
+                              "type": "number"
+                            },
+                            "datetime": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/track/{driverId}": {
+        "get": {
+          "tags": [
+            "tracking service"
+          ],
+          "summary": "tracking vehicle",
+          "parameters": [
+            {
+              "name": "driverId",
+              "in": "path",
+              "description": "id of driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "tracking successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "tracking successful"
+                      },
+                      "location": {
+                        "type": "object",
+                        "properties": {
+                          "latitude": {
+                            "type": "string"
+                          },
+                          "longtitude": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "404": {
+              "description": "driver not found"
+            }
+          }
+        }
+      },
+      "/vehicle/{driverId}": {
+        "get": {
+          "tags": [
+            "vehicle service"
+          ],
+          "summary": "taxi's infomation",
+          "parameters": [
+            {
+              "name": "driverId",
+              "in": "path",
+              "description": "id of driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get vehicle successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get vehicle successful"
+                      },
+                      "license_plate": {
+                        "type": "string"
+                      },
+                      "car_brand": {
+                        "type": "string"
+                      },
+                      "Active_time": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "driver id not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/messaging/{chatroomId}": {
+        "post": {
+          "tags": [
+            "messaging service"
+          ],
+          "summary": "chat with taxi",
+          "parameters": [
+            {
+              "name": "chatroomId",
+              "in": "path",
+              "description": "id of chatroom",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "messaging",
+              "in": "body",
+              "description": "sent message",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "messaging sent successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "messaging sent successful"
+                      },
+                      "chaId": {
+                        "type": "string"
+                      },
+                      "senderId": {
+                        "type": "string"
+                      },
+                      "messaging": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "text": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "404": {
+              "description": "chatroom id not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "messaging service"
+          ],
+          "summary": "get message",
+          "parameters": [
+            {
+              "name": "chatroomId",
+              "in": "path",
+              "description": "id of chatroom",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "messaging get successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "messaging get successful"
+                      },
+                      "chaId": {
+                        "type": "string"
+                      },
+                      "senderId": {
+                        "type": "string"
+                      },
+                      "messaging": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "text": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "chatroom id not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/customer": {
+        "post": {
+          "tags": [
+            "customer service"
+          ],
+          "summary": "Customer's information",
+          "requestBody": {
+            "description": "customer's information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Firstname Lastname",
+                      "required": true
+                    },
+                    "age": {
+                      "type": "number",
+                      "example": 999,
+                      "required": true
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "Man",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Create information successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "text",
+                        "example": "Add customer's information successful"
+                      },
+                      "statusCode": {
+                        "type": "number",
+                        "example": 201
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Firstname Lastname"
+                      },
+                      "age": {
+                        "type": "number",
+                        "example": 999
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "Man"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "customer service"
+          ],
+          "summary": "Customer's information",
+          "parameters": [
+            {
+              "name": "userToken",
+              "in": "header",
+              "description": "User's token",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Request information successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "text",
+                        "example": "Request customer's information successful"
+                      },
+                      "statusCode": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Firstname Lastname"
+                      },
+                      "age": {
+                        "type": "number",
+                        "example": 999
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "Man"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "404": {
+              "description": "User not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "customer service"
+          ],
+          "summary": "Update Customer's information",
+          "parameters": [
+            {
+              "name": "userToken",
+              "in": "header",
+              "description": "User's token",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "customer's information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Firstname Lastname",
+                      "required": true
+                    },
+                    "age": {
+                      "type": "number",
+                      "example": 999,
+                      "required": true
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "Man",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Update information successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "text",
+                        "example": "Update customer's information successful"
+                      },
+                      "statusCode": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Firstname Lastname"
+                      },
+                      "age": {
+                        "type": "number",
+                        "example": 999
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "Man"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "404": {
+              "description": "User not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "customer service"
+          ],
+          "summary": "Delte Customer's information",
+          "parameters": [
+            {
+              "name": "userToken",
+              "in": "header",
+              "description": "User's token",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Delte information successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "text",
+                        "example": "Delete customer's information successful"
+                      },
+                      "statusCode": {
+                        "type": "number",
+                        "example": 200
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "404": {
+              "description": "User not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/feedback/{driverId}": {
+        "post": {
+          "tags": [
+            "feedback service"
+          ],
+          "summary": "feed back of driver",
+          "parameters": [
+            {
+              "name": "driverId",
+              "in": "path",
+              "description": "id of driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "userId",
+              "in": "query",
+              "description": "id of user",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "message",
+              "in": "body",
+              "description": "feedback message to driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "feedback sent successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "feedback sent successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "404": {
+              "description": "driver not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "feedback service"
+          ],
+          "summary": "Get feed back of driver",
+          "parameters": [
+            {
+              "name": "driverId",
+              "in": "path",
+              "description": "id of driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Request feedback successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Request feedback successful"
+                      },
+                      "userId": {
+                        "type": "string",
+                        "example": "e1dac092-48ed-467c-9612-4a1086530032"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "404": {
+              "description": "driver not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/promotion": {
+        "post": {
+          "tags": [
+            "promotion service"
+          ],
+          "summary": "Create promotion",
+          "requestBody": {
+            "description": "customer's information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "promotionName": {
+                      "type": "string",
+                      "example": "Promotion name",
+                      "required": true
+                    },
+                    "promotionDescription": {
+                      "type": "text",
+                      "example": "Promotion description",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Create promotion successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "text",
+                        "example": "Create promotion successful"
+                      },
+                      "statusCode": {
+                        "type": "number",
+                        "example": 201
+                      },
+                      "promotionName": {
+                        "type": "string",
+                        "example": "Promotion name"
+                      },
+                      "promotionDescription": {
+                        "type": "text",
+                        "example": "Promotion description"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "promotion service"
+          ],
+          "summary": "get promotion",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "query",
+              "description": "id of user",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "promotion get successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "promotion get successful"
+                      },
+                      "promotion": {
+                        "type": "string",
+                        "example": "you got 30% discount!"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/location/getRoute": {
+        "get": {
+          "tags": [
+            "location service"
+          ],
+          "summary": "Get route",
+          "parameters": [
+            {
+              "name": "startLongitude",
+              "in": "query",
+              "description": "Longitude of starting point",
+              "required": true,
+              "schema": {
+                "type": "double"
+              }
+            },
+            {
+              "name": "startLatitude",
+              "in": "path",
+              "description": "Latitude of starting point",
+              "required": true,
+              "schema": {
+                "type": "double"
+              }
+            },
+            {
+              "name": "destLongitude",
+              "in": "path",
+              "description": "Longitude of destination",
+              "required": true,
+              "schema": {
+                "type": "double"
+              }
+            },
+            {
+              "name": "destLatitude",
+              "in": "path",
+              "description": "Latitude of destination",
+              "required": true,
+              "schema": {
+                "type": "double"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Route Summary",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "price": {
+                        "type": "number",
+                        "example": 100.50
+                      },
+                      "distance": {
+                        "type": "number",
+                        "example": 42.75
+                      },
+                      "eta": {
+                        "type": "number",
+                        "example": 120
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            }
+          }
+        }
+      },
+      "/driver/{driverId}": {
+        "get": {
+          "tags": [
+            "driver service"
+          ],
+          "summary": "get driver's infomation",
+          "parameters": [
+            {
+              "name": "driverId",
+              "in": "path",
+              "description": "id of driver",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "driver get successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "promotion get successful"
+                      },
+                      "id": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "number"
+                      },
+                      "vehicle": {
+                        "type": "object",
+                        "properties": {
+                          "license_plate": {
+                             "type": "string"
+                          },
+                          "car_brand": {
+                             "type": "string"
+                          },
+                          "Active_time": {
+                             "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "driver id not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      }
+    }
+  }

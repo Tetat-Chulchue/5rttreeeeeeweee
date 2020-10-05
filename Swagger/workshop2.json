@@ -1,0 +1,677 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Simple Inventory API",
+      "description": "This is a simple API",
+      "contact": {
+        "email": "you@your-company.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://virtserver.swaggerhub.com/Tetat-Chulchue/Taxi/1.0.0",
+        "description": "SwaggerHub API Auto Mocking"
+      }
+    ],
+    "tags": [
+      {
+        "name": "course service",
+        "desciption": "Api for course service"
+      },
+      {
+        "name": "student service",
+        "desciption": "Api for student service"
+      },
+      {
+        "name": "lecturer service",
+        "desciption": "Api for lecturer service"
+      },
+      {
+        "name": "finance service",
+        "desciption": "Api for finance service"
+      },
+      {
+        "name": "evaluation service",
+        "desciption": "Api for evaluation service"
+      },
+      {
+        "name": "grade service",
+        "desciption": "Api for grade service"
+      },
+      {
+        "name": "form and km service",
+        "desciption": "Api for form and km service"
+      }
+    ],
+    "paths": {
+      "/course/{courseId}": {
+        "get": {
+          "tags": [
+            "course service"
+          ],
+          "summary": "course information",
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "description": "course id",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get course successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get course successful"
+                      },
+                      "course": {
+                        "course id": {
+                          "type": "number",
+                          "example": "06016319"
+                        },
+                        "course description": {
+                          "type": "string"
+                        },
+                        "number of registed student": {
+                          "type": "number"
+                        },
+                        "number of max student": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input error"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "404": {
+            "description": "course not found"
+          }
+        }
+      },
+      "/lecturer/{lecturerId}": {
+        "get": {
+          "tags": [
+            "lecturer service"
+          ],
+          "summary": "get lecturer description",
+          "parameters": [
+            {
+              "name": "lecturerId",
+              "in": "path",
+              "description": "id of lecturer",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get lecturer successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get lecturer successful"
+                      },
+                      "lecturerName": {
+                        "type": "string"
+                      },
+                      "course": {
+                        "type": "object",
+                        "properties": {
+                          "course title": {
+                            "type": "string"
+                          },
+                          "credit": {
+                            "type": "string"
+                          },
+                          "course description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input error"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "404": {
+              "description": "lecturer not found"
+            }
+          }
+        }
+      },
+      "/finance/pay/{studentId}": {
+        "post": {
+          "tags": [
+            "finance service"
+          ],
+          "summary": "course payment service",
+          "parameters": [
+            {
+              "name": "studentId",
+              "in": "path",
+              "description": "id of student",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "pay successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "pay successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "404": {
+              "description": "student not found"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/finance/history/{studentId}": {
+        "get": {
+          "tags": [
+            "finance service"
+          ],
+          "summary": "get payment history",
+          "parameters": [
+            {
+              "name": "studentId",
+              "in": "path",
+              "description": "id of student",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "retrieve successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "retrieve successful"
+                      },
+                      "histoty": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "price": {
+                              "type": "number"
+                            },
+                            "datetime": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      },
+      "/grade/{studentId}": {
+        "get": {
+          "tags": [
+            "grade service"
+          ],
+          "summary": "get student grade",
+          "parameters": [
+            {
+              "name": "studentId",
+              "in": "path",
+              "description": "id of student",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get grade successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get grade successful"
+                      },
+                      "GPA": {
+                        "type": "string",
+                        "example": "4.00"
+                      },
+                      "grade": {
+                        "type": "object",
+                        "properties": {
+                          "course title": {
+                            "type": "string"
+                          },
+                          "credit": {
+                            "type": "string"
+                          },
+                          "grade": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input error"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "404": {
+              "description": "student not found"
+            }
+          }
+        }
+      },
+      "/evaluation/{coursedId}": {
+        "get": {
+          "tags": [
+            "evaluation service"
+          ],
+          "summary": "teacher evaluation",
+          "parameters": [
+            {
+              "name": "coursedId",
+              "in": "path",
+              "description": "id of course",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get course successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get grade successful"
+                      },
+                      "course": {
+                        "type": "object",
+                        "properties": {
+                          "course title": {
+                            "type": "string"
+                          },
+                          "credit": {
+                            "type": "string"
+                          },
+                          "course description": {
+                            "type": "string"
+                          }
+                        },
+                        "evaluate form": {
+                          "type": "object",
+                          "properties": {
+                            "number": {
+                              "type": "number"
+                            },
+                            "evaluation title": {
+                              "type": "string"
+                            },
+                            "grading": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "bad input error"
+              },
+              "500": {
+                "description": "internal server error"
+              },
+              "404": {
+                "description": "course not found"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "evaluation service"
+          ],
+          "summary": "submit teacher evaluation",
+          "parameters": [
+            {
+              "name": "coursedId",
+              "in": "path",
+              "description": "id of course",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "studentId",
+              "in": "body",
+              "description": "id of student",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "submit evaluation successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "submit evaluation successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input error"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "404": {
+              "description": "course not found"
+            }
+          }
+        }
+      },
+      "/student/{studentId}": {
+        "get": {
+          "tags": [
+            "student service"
+          ],
+          "summary": "student service",
+          "parameters": [
+            {
+              "name": "studentId",
+              "in": "path",
+              "description": "id of student",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get student successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "get grade successful"
+                      },
+                      "GPA": {
+                        "type": "string",
+                        "example": "4.00"
+                      },
+                      "grade": {
+                        "type": "object",
+                        "properties": {
+                          "course title": {
+                            "type": "string"
+                          },
+                          "credit": {
+                            "type": "string"
+                          },
+                          "grade": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Alex"
+                      },
+                      "lastname": {
+                        "type": "string",
+                        "example": "Baker"
+                      },
+                      "year": {
+                        "type": "number",
+                        "example": 3
+                      },
+                      "branch": {
+                        "type": "string",
+                        "example": "IT"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input error"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "404": {
+              "description": "student not found"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "student service"
+          ],
+          "summary": "Add student",
+          "requestBody": {
+            "description": "student's information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "studentName": {
+                      "type": "string",
+                      "example": "Alex",
+                      "required": true
+                    },
+                    "studentLastname": {
+                      "type": "string",
+                      "example": "Baker",
+                      "required": true
+                    },
+                    "year": {
+                      "type": "number",
+                      "example": 3,
+                      "require": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "add student successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "add student successful"
+                      },
+                      "GPA": {
+                        "type": "string",
+                        "example": "4.00"
+                      },
+                      "grade": {
+                        "type": "object",
+                        "properties": {
+                          "course title": {
+                            "type": "string"
+                          },
+                          "credit": {
+                            "type": "string"
+                          },
+                          "grade": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Alex"
+                      },
+                      "lastname": {
+                        "type": "string",
+                        "example": "Baker"
+                      },
+                      "year": {
+                        "type": "number",
+                        "example": 3
+                      },
+                      "branch": {
+                        "type": "string",
+                        "example": "IT"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input error"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        }
+      }
+    }
+  }
