@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <center>
+      <h1>Dashboard</h1>
+    </center>
+
+    <div id="serviceList"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+      integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let serviceList = [
+        "SERVICE1",
+        "SERVICE2",
+        "SERVICE3",
+        "SERVICE4",
+        "SERVICE5",
+      ];
+
+      function createService(serviceName, status) {
+        let div = document.createElement("div");
+        div.id = serviceName;
+        let textHeader = document.createElement("H1");
+        textHeader.innerText = serviceName;
+        div.appendChild(textHeader);
+        if (status) {
+          div.style.backgroundColor = "green";
+        } else {
+          div.style.backgroundColor = "red";
+        }
+
+        document.getElementById("serviceList").appendChild(div);
+      }
+
+      axios
+        .get("http://localhost:8761/eureka/apps", { crossdomain: true })
+        .then(function (response) {
+          serviceList.map((data, key) => {
+            createService(data, false);
+          });
+
+          response.data.applications.application.map((data) => {
+            document.getElementById(data.name).style.backgroundColor = "green";
+          });
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    </script>
+  </body>
+</html>
