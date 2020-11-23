@@ -10,14 +10,18 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.microservices.servicediscovery.bean.Promotion;
 
+@CrossOrigin
 @RestController
 public class PromotionService {
 
@@ -46,7 +50,7 @@ public class PromotionService {
 		return new ResponseEntity<Promotion>(promo, HttpStatus.OK);
 	}
 	
-	
+	// ADD PRODUCT
 	@RequestMapping(value = "/promotion/product", method=RequestMethod.POST)
 	public ResponseEntity<Promotion> add2(@RequestBody Promotion promo) {
 		promo.setType("product");
@@ -83,6 +87,7 @@ public class PromotionService {
 		return new ResponseEntity<Promotion>(promo, HttpStatus.OK);
 	}
 	
+	// GET PROMOTIONS
 	@RequestMapping(value = "/promotion", method=RequestMethod.GET)
 	public  ResponseEntity<List<Promotion>> get() {
 		
@@ -102,7 +107,8 @@ public class PromotionService {
 	         
 	         
 	         while ( rs.next() ) {
-	        	 Promotion temp = new Promotion(rs.getInt("id"), rs.getString("name"), rs.getString("method"), rs.getString("type"), rs.getString("description"), rs.getInt("quantity"), rs.getDate("expDate"), rs.getInt("amount"), rs.getInt("min"), rs.getInt("max"), rs.getInt("productId"));
+	        	 Date date1 = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(rs.getString("expDate"));
+	        	 Promotion temp = new Promotion(rs.getInt("id"), rs.getString("name"), rs.getString("method"), rs.getString("type"), rs.getString("description"), rs.getInt("quantity"), date1, rs.getInt("amount"), rs.getInt("min"), rs.getInt("max"), rs.getInt("productId"));
 	        	 query.add(temp);
 	          }
 	         
@@ -114,7 +120,7 @@ public class PromotionService {
 		
 		 return new ResponseEntity<List<Promotion>>(query, HttpStatus.OK);
 	}
-	
+	// EDIT QUANTITY
 	@RequestMapping(value = "/promotion/apply/{id}", method=RequestMethod.PATCH)
 	public ResponseEntity<Promotion> add3(@PathVariable("id") int id) {
 		Connection c = null;
@@ -147,7 +153,7 @@ public class PromotionService {
 	      }
 		return new ResponseEntity<Promotion>(temp, HttpStatus.OK);
 	}
-	
+	// DELETE PROMOTIONS
 	@RequestMapping(value = "/promotion/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Promotion> delete(@PathVariable("id") int id) {
 		Connection c = null;
