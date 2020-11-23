@@ -23,6 +23,10 @@ public class SQLiteJDBC {
 	                        " min		 	 INT 	NOT NULL, " +
 	                        " max		 	 INT 	NOT NULL) "; 
 	         stmt.executeUpdate(sql);
+	         sql = "CREATE TABLE PRODUCT_PROMOTIONS " +
+                     "(id INTEGER PRIMARY KEY," +
+                     " productId INTEGER NOT NULL) ";
+	         stmt.executeUpdate(sql);
 	         stmt.close();
 	         c.close();
 	      } catch ( Exception e ) {
