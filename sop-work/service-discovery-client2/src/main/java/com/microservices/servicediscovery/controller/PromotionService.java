@@ -34,7 +34,7 @@ public class PromotionService {
 	         Class.forName("org.sqlite.JDBC");
 	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
 	         stmt = c.createStatement();
-	         sql = "INSERT INTO PROMOTIONS (name, method, type, description, expDate, amount, min, max)" + String.format("VALUES ('%s', '%s', '%s', '%s', '%s', %d, %d, %d);", promo.getName(), promo.getMethod(), promo.getType(), promo.getDescription(), promo.getExpDate(), promo.getAmount(), promo.getMin(), promo.getMax());
+	         sql = "INSERT INTO PROMOTIONS (name, method, type, description, quantity, expDate, amount, min, max)" + String.format("VALUES ('%s', '%s', '%s', '%s', %d , '%s', %d, %d, %d);", promo.getName(), promo.getMethod(), promo.getType(), promo.getDescription(), promo.getQuantity(), promo.getExpDate(), promo.getAmount(), promo.getMin(), promo.getMax());
 	         stmt.executeUpdate(sql);
 	         stmt.close();
 	         c.close();
@@ -49,6 +49,7 @@ public class PromotionService {
 	
 	@RequestMapping(value = "/promotion/product", method=RequestMethod.POST)
 	public ResponseEntity<Promotion> add2(@RequestBody Promotion promo) {
+		promo.setType("product");
 		Connection c = null;
 	    Statement stmt = null;
 	    String sql = "";
@@ -56,7 +57,7 @@ public class PromotionService {
 	         Class.forName("org.sqlite.JDBC");
 	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
 	         stmt = c.createStatement();
-	         sql = "INSERT INTO PROMOTIONS (name, method, type, description, expDate, amount, min, max)" + String.format("VALUES ('%s', '%s', '%s', '%s', '%s', %d, %d, %d);", promo.getName(), promo.getMethod(), promo.getType(), promo.getDescription(), promo.getExpDate(), promo.getAmount(), promo.getMin(), promo.getMax());
+	         sql = "INSERT INTO PROMOTIONS (name, method, type, description, quantity, expDate, amount, min, max)" + String.format("VALUES ('%s', '%s', '%s', '%s', %d, '%s', %d, %d, %d);", promo.getName(), promo.getMethod(), "product", promo.getDescription(), promo.getQuantity(), promo.getExpDate(), promo.getAmount(), promo.getMin(), promo.getMax());
 	         stmt.executeUpdate(sql);
 	         
 	         
@@ -95,14 +96,13 @@ public class PromotionService {
 	         Class.forName("org.sqlite.JDBC");
 	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
 	         stmt = c.createStatement();
-	         sql = "SELECT PROMOTIONS.id, PROMOTIONS.name, PROMOTIONS.method, PROMOTIONS.type, PROMOTIONS.description, PROMOTIONS.expDate, PROMOTIONS.amount, PROMOTIONS.min, PROMOTIONS.max, PRODUCT_PROMOTIONS.productId FROM PROMOTIONS LEFT JOIN PRODUCT_PROMOTIONS ON PROMOTIONS.id=PRODUCT_PROMOTIONS.id";
+	         sql = "SELECT PROMOTIONS.id, PROMOTIONS.name, PROMOTIONS.method, PROMOTIONS.type, PROMOTIONS.description, PROMOTIONS.quantity, PROMOTIONS.expDate, PROMOTIONS.amount, PROMOTIONS.min, PROMOTIONS.max, PRODUCT_PROMOTIONS.productId FROM PROMOTIONS LEFT JOIN PRODUCT_PROMOTIONS ON PROMOTIONS.id=PRODUCT_PROMOTIONS.id";
 	         ResultSet rs = stmt.executeQuery( sql );
 	         
 	         
 	         
 	         while ( rs.next() ) {
-	        	 Promotion temp = new Promotion(rs.getInt("id"), rs.getString("name"), rs.getString("method"), rs.getString("type"), rs.getString("description"), rs.getDate("expDate"), rs.getInt("amount"), rs.getInt("min"), rs.getInt("max"), rs.getInt("productId"));
-	        	 System.out.println('1');
+	        	 Promotion temp = new Promotion(rs.getInt("id"), rs.getString("name"), rs.getString("method"), rs.getString("type"), rs.getString("description"), rs.getInt("quantity"), rs.getDate("expDate"), rs.getInt("amount"), rs.getInt("min"), rs.getInt("max"), rs.getInt("productId"));
 	        	 query.add(temp);
 	          }
 	         
@@ -113,6 +113,39 @@ public class PromotionService {
 	      }
 		
 		 return new ResponseEntity<List<Promotion>>(query, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/promotion/apply", method=RequestMethod.PATCH)
+	public ResponseEntity<Promotion> add3(@RequestBody Promotion promo) {
+		Connection c = null;
+	    Statement stmt = null;
+	    String sql = "";
+	    Promotion temp = new Promotion();
+		try {
+	         Class.forName("org.sqlite.JDBC");
+	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+	         stmt = c.createStatement();     
+	         
+	         sql = "SELECT * FROM PROMOTIONS WHERE id=" + promo.getId() + ";";
+	         ResultSet rs = stmt.executeQuery( sql );
+	         
+	         while ( rs.next() ) {
+	        	 temp = new Promotion(rs.getInt("id"), rs.getString("name"), rs.getString("method"), rs.getString("type"), rs.getString("description"), rs.getInt("quantity"), rs.getDate("expDate"), rs.getInt("amount"), rs.getInt("min"), rs.getInt("max"), 0);
+	          }
+	         if (temp.getQuantity() > 0) {
+	        	 temp.setQuantity(temp.getQuantity()-1);
+		         sql = "UPDATE PROMOTIONS set quantity=" + temp.getQuantity() + " WHERE id =" + promo.getId() + ";";
+		         stmt.executeUpdate(sql);
+	         }
+	         stmt.close();
+	         c.close();
+	         
+	         
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+	      }
+		return new ResponseEntity<Promotion>(temp, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/shiba", method=RequestMethod.GET)

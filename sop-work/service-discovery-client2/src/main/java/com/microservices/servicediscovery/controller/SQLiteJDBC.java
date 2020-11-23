@@ -17,7 +17,8 @@ public class SQLiteJDBC {
 	                        " name           TEXT    NOT NULL, " + 
 	                        " method         TEXT     NOT NULL, " +
 	                        " type			 TEXT    NOT NULL, " +
-	                        " description    TEXT, " + 
+	                        " description    TEXT, " +
+	                        " quantity    	 INT  NOT NULL, " + 
 	                        " expDate        DATE, " +
 	                        " amount		 INT 	NOT NULL, " +
 	                        " min		 	 INT 	NOT NULL, " +

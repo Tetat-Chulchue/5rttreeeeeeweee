@@ -5,7 +5,7 @@ import java.util.Date;
 public class Promotion {
 	String name, method, type, description;
 	Date expDate;
-	int amount, min, max, productId, id;
+	int amount, min, max, productId, id, quantity;
 
 	public Promotion() {
 		this.id = 0;
@@ -13,6 +13,7 @@ public class Promotion {
 		this.method = null;
 		this.type = null;
 		this.description = null;
+		this.quantity = 0;
 		this.expDate = null;
 		this.amount = 0;
 		this.min = 0;
@@ -21,7 +22,7 @@ public class Promotion {
 		
 	}
 	
-	public Promotion(int id, String name, String method, String type, String description, Date expDate, int amount, int min,
+	public Promotion(int id, String name, String method, String type, String description, int quantity, Date expDate, int amount, int min,
 			int max, int productId) {
 		super();
 		this.id = id;
@@ -29,11 +30,20 @@ public class Promotion {
 		this.method = method;
 		this.type = type;
 		this.description = description;
+		this.quantity = quantity;
 		this.expDate = expDate;
 		this.amount = amount;
 		this.min = min;
 		this.max = max;
 		this.productId = productId;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getName() {
