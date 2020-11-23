@@ -12,10 +12,11 @@ public class SQLiteJDBC {
 	         System.out.println("Opened database successfully");
 
 	         stmt = c.createStatement();
-	         String sql = "CREATE TABLE PROMOTION " +
-	                        "(id INT PRIMARY KEY     NOT NULL," +
+	         String sql = "CREATE TABLE PROMOTIONS " +
+	                        "(id INTEGER PRIMARY KEY   AUTOINCREMENT," +
 	                        " name           TEXT    NOT NULL, " + 
-	                        " method         TEXT     NOT NULL, " + 
+	                        " method         TEXT     NOT NULL, " +
+	                        " type			 TEXT    NOT NULL, " +
 	                        " description    TEXT, " + 
 	                        " expDate        DATE, " +
 	                        " amount		 INT 	NOT NULL, " +
