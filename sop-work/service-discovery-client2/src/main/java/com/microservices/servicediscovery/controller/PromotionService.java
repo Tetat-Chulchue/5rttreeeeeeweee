@@ -115,8 +115,8 @@ public class PromotionService {
 		 return new ResponseEntity<List<Promotion>>(query, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/promotion/apply", method=RequestMethod.PATCH)
-	public ResponseEntity<Promotion> add3(@RequestBody Promotion promo) {
+	@RequestMapping(value = "/promotion/apply/{id}", method=RequestMethod.PATCH)
+	public ResponseEntity<Promotion> add3(@PathVariable("id") int id) {
 		Connection c = null;
 	    Statement stmt = null;
 	    String sql = "";
@@ -126,7 +126,7 @@ public class PromotionService {
 	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
 	         stmt = c.createStatement();     
 	         
-	         sql = "SELECT * FROM PROMOTIONS WHERE id=" + promo.getId() + ";";
+	         sql = "SELECT * FROM PROMOTIONS WHERE id=" + id + ";";
 	         ResultSet rs = stmt.executeQuery( sql );
 	         
 	         while ( rs.next() ) {
@@ -134,7 +134,7 @@ public class PromotionService {
 	          }
 	         if (temp.getQuantity() > 0) {
 	        	 temp.setQuantity(temp.getQuantity()-1);
-		         sql = "UPDATE PROMOTIONS set quantity=" + temp.getQuantity() + " WHERE id =" + promo.getId() + ";";
+		         sql = "UPDATE PROMOTIONS set quantity=" + temp.getQuantity() + " WHERE id =" + id + ";";
 		         stmt.executeUpdate(sql);
 	         }
 	         stmt.close();
@@ -146,6 +146,31 @@ public class PromotionService {
 	         System.exit(0);
 	      }
 		return new ResponseEntity<Promotion>(temp, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/promotion/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Promotion> delete(@PathVariable("id") int id) {
+		Connection c = null;
+	    Statement stmt = null;
+	    String sql = "";
+		try {
+	         Class.forName("org.sqlite.JDBC");
+	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+	         stmt = c.createStatement();     
+	         
+	         sql = "DELETE from PROMOTIONS WHERE id=" + id + ";";
+	         stmt.executeUpdate(sql);
+	         sql = "DELETE from PRODUCT_PROMOTIONS WHERE id=" + id + ";";
+	         stmt.executeUpdate(sql);
+	         stmt.close();
+	         c.close();
+	         
+	         
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+	      }
+		return new ResponseEntity<Promotion>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/shiba", method=RequestMethod.GET)
